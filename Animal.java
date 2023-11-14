@@ -54,9 +54,9 @@ public class Animal extends EtreVivant {
     private boolean estNourritureCompatible(EtreVivant nourriture) {
         switch (this.typeAnimal.getAlimentation()) {
             case CARNIVORE:
-                return nourriture instanceof Animal && nourriture.estVivant();
+                return nourriture instanceof Animal && nourriture.isVivant();
             case CHAROGNARD:
-                return nourriture instanceof Animal && !nourriture.estVivant();
+                return nourriture instanceof Animal && !nourriture.isVivant();
             case HERBIVORE:
                 return nourriture instanceof Vegetal;
             case OMNIVORE:
@@ -73,7 +73,7 @@ public class Animal extends EtreVivant {
 	 * @return animal
 	 */
 	public TypeAnimal getAnimal() {
-		return this.animal;
+		return this.getAnimal();
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class Animal extends EtreVivant {
 	 * @param animal
 	 */
 	public void setAnimal(TypeAnimal animal) {
-		this.animal = animal;
+		this.typeAnimal = animal;
 	}
 
 	/**
@@ -159,8 +159,8 @@ public class Animal extends EtreVivant {
 	public String toString() {
 		return "Animal ["
 				+ super.toString()
-				+ ", typeAnimal=" + this.animal
-				+ ", Alimentation=" + this.animal.alimentation
+				+ ", typeAnimal=" + this.typeAnimal
+				+ ", Alimentation=" + this.typeAnimal.alimentation
 				+ ", sexe=" + this.sexe 
 				+ ", age=" + this.age 
 				+ ", taille=" + this.taille 

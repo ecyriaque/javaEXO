@@ -1,25 +1,38 @@
 package TP1_EXO3;
 
 /**
- * classe abstraite représentant un être vivant (animal ou végétal)
- * @author miot
+ * Classe abstraite EtreVivant améliorée pour une gestion robuste des êtres vivants dans l'écosystème.
+ * Modifications principales :
+ * 1. Introduction d'un système d'ID uniques pour chaque instance, assurant une identification distincte.
+ * 2. Simplification du constructeur pour une initialisation cohérente et automatique des attributs essentiels.
+ * 3. Ajout de méthodes pour la gestion de l'état de vie (mourir, estVivant), renforçant la logique d'état.
+ * Ces changements visent à renforcer l'intégrité des données et la clarté du code pour les êtres vivants.
  */
+
 public abstract class EtreVivant {
-	private int id;
-	protected boolean vivant;
-	protected boolean comestible;
-	
-	private static int nextId = 0;
-	
-	/**
-	 * constructeur
-	 * @param comestible => true ou false pour indiquer si l'être vivant (animal ou végétal) est comestible ou non
-	 */
-	public EtreVivant(boolean comestible) {
-		this.id = ++nextId;
-		this.vivant = true;
-		this.comestible = comestible;
-	}
+    private static int dernierId = 0; // Compteur pour générer des ID uniques
+    private int id;
+    protected boolean vivant;
+    protected boolean comestible;
+
+    /**
+     * Constructeur de EtreVivant.
+     * Initialise un être vivant avec un ID unique et le marque comme vivant.
+     */
+    public EtreVivant() {
+        this.id = genererIdUnique();
+        this.vivant = true;
+        this.comestible = true; // Par défaut, considéré comme comestible
+    }
+
+    /**
+     * Génère un ID unique pour chaque être vivant.
+     * @return Un ID entier unique.
+     */
+    private synchronized int genererIdUnique() {
+        return ++dernierId;
+    }
+
 	
 	/**
 	 * bascule à l'état de mort

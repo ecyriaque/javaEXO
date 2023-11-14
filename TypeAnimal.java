@@ -20,5 +20,10 @@ public enum TypeAnimal {
 	private TypeAnimal(Alimentation alimentation) {
 		this.alimentation = alimentation;
 	}
+
+	Alimentation getAlimentation() {
+		
+		return this.alimentation;
+	}
 	
 }

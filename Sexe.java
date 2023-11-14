@@ -8,5 +8,5 @@ public enum Sexe {
 	
 	FEMELLE,
 	MALE,
-	
+	hermaphrodite,
 }

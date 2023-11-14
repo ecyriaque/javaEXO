@@ -1,26 +1,32 @@
 package TP1_EXO3;
 
 /**
- * classe héritée de EtreVivant représentant un végétal
- * NB : identique à EtreVivant mais comportement des végétaux à définir en cas d'évolution du programme
- * @author miot
+ * Classe représentant un végétal dans l'écosystème.
+ * Hérite de la classe EtreVivant.
  */
 public class Vegetal extends EtreVivant {
-	
-	/**
-	 * constructeur
-	 * @param comestible ou pas (true ou false)
-	 */
-	public Vegetal(boolean comestible) {
-		super(comestible);
-	}
+    private String nom;
+
+    /**
+     * Constructeur pour Vegetal.
+     * @param nom Nom du végétal.
+     */
+    public Vegetal(String nom, int hauteur) {
+        super();
+        this.nom = nom;
+
+    }
 
 	/**
 	 * toString
 	 */
-	@Override
-	public String toString() {
-		return "Vegetal [" + super.toString() + "]";
-	}
+    @Override
+    public String toString() {
+        // Implémentation de la méthode toString pour afficher les informations du végétal.
+        return "Vegetal{" +
+               "nom='" + nom + '\'' +
+               ", id=" + getId() +
+               '}';
+    }
 	
 }

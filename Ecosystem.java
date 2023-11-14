@@ -1,28 +1,28 @@
 package TP1_EXO3;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * classe représentant un écosytème avec des animaux et des végétaux
- * @author miot
+ * Classe représentant un écosystème.
+ * Gère les interactions entre les différents êtres vivants (animaux et végétaux).
  */
 public class Ecosystem {
 	private int id;
 	private String nom;
-	private HashMap<Integer, EtreVivant> etresVivants;
-	
-	private static int nextId = 0;
+    private List<EtreVivant> etresVivants; // Liste pour stocker tous les êtres vivants de l'écosystème
 
-	/**
-	 * constructeur
-	 * @param nom donné à l'écosystème
-	 */
-	public Ecosystem(String nom) {
-		this.id = ++nextId;
-		this.nom = nom;
-		this.etresVivants = new HashMap<Integer, EtreVivant>();
-	}
-	
+    /**
+     * Constructeur pour Ecosysteme.
+     * Initialise la liste des êtres vivants.
+     */
+    public Ecosystem() {
+        etresVivants = new ArrayList<>();
+    }
+
+
+
+
 	/**
 	 * donne un être vivant à manger à un animal puis le fait disparaître
 	 * @param animal qui mange
@@ -36,31 +36,27 @@ public class Ecosystem {
 	
 	// ======================== GESTION ÊTRES VIVANTS ========================
 	
-	/**
-	 * ajoute un être vivant à l'écosystème
-	 * @param etreVivant (animal ou végétal) à ajouter à l'écosytème
-	 */
-	public void ajouterEtreVivant(EtreVivant etreVivant) {
-		this.etresVivants.put(etreVivant.getId(), etreVivant);
-	}
+    /**
+     * Ajoute un être vivant à l'écosystème.
+     * @param etre L'être vivant à ajouter (Animal ou Vegetal).
+     */
+    public void ajouterEtreVivant(EtreVivant etre) {
+        etresVivants.add(etre);
+    }
 	
-	/**
-	 * retire un être vivant de l'écosystème
-	 * @param etreVivant (animal ou végétal) à retirer de l'écosytème
-	 */
 	public void removeEtreVivant(EtreVivant etreVivant) {
-		this.etresVivants.remove(etreVivant.getId(), etreVivant);
+		etresVivants.removeIf(e -> e.getId() == etreVivant.getId());
 	}
-	
-	/**
-	 * trouve un être vivant associé à un id
-	 * @param idEtreVivant (numéro de ID)
-	 * @return être vivant correspondant à l'id
-	 */
+
 	public EtreVivant findEtreVivant(int idEtreVivant) {
-		return this.etresVivants.get(idEtreVivant);
+		for (EtreVivant etre : etresVivants) {
+			if (etre.getId() == idEtreVivant) {
+				return etre;
+			}
+		}
+		return null;
 	}
-	
+
 	/**
 	 * affiche tous les être vivants de l'écosystème 
 	 */
@@ -87,25 +83,27 @@ public class Ecosystem {
 	}
 
 	/**
-	 * getter
-	 * @return liste des êtres vivants de l'écosystème
+	 * Getter pour obtenir la liste des êtres vivants de l'écosystème.
+	 * Retourne une copie de la liste pour éviter la modification directe de la liste originale.
+	 * @return Une copie de la liste des êtres vivants.
 	 */
-	public HashMap<Integer, EtreVivant> getEtresVivants() {
-		return this.etresVivants;
+	public List<EtreVivant> getEtresVivants() {
+	    return new ArrayList<>(this.etresVivants);
 	}
-	
 	// =========================================================
 
-	/**
-	 * toString
-	 */
-	@Override
-	public String toString() {
-		return "Ecosystem ["
-				+ "id=" + this.id 
-				+ ", nom=" + this.nom 
-				+ ", etresVivants=" + this.etresVivants 
-				+ "]";
-	}
+    /**
+     * Retourne une représentation textuelle de l'écosystème.
+     * @return String représentant l'état actuel de l'écosystème.
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Ecosysteme{\n");
+        for (EtreVivant etre : etresVivants) {
+            sb.append(etre.toString()).append("\n");
+        }
+        sb.append("}");
+        return sb.toString();
+    }
 	
 }
